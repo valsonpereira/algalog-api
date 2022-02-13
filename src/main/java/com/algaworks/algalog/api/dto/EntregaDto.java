@@ -12,10 +12,9 @@ import java.time.OffsetDateTime;
 public class EntregaDto {
 
     private Long id;
-    private String nomeCliente;
+    private ClienteDto cliente;
     private DestinatarioDto destinatario;
     private BigDecimal taxa;
     private StatusEntrega statusEntrega;
     private OffsetDateTime dataPedido;
-    private OffsetDateTime dataFinalizacao;
 }
