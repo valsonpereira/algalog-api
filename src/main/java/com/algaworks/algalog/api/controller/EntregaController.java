@@ -6,6 +6,7 @@ import com.algaworks.algalog.domain.model.Entrega;
 import com.algaworks.algalog.domain.repository.EntregaRepository;
 import com.algaworks.algalog.domain.service.SolicitacaoEntregaService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class EntregaController {
 
     private SolicitacaoEntregaService solicitacaoEntregaService;
     private EntregaRepository entregaRepository;
+    private ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,21 +33,8 @@ public class EntregaController {
     public ResponseEntity<EntregaDto> buscar(@PathVariable Long entregaId){
         return entregaRepository.findById(entregaId)
                 .map(entrega -> {
-                        EntregaDto entregaDto = new EntregaDto();
-                        entregaDto.setId(entrega.getId());
-                        entregaDto.setNomeCliente(entrega.getCliente().getNome());
-                        entregaDto.setDestinatario(new DestinatarioDto());
-                        entregaDto.getDestinatario().setNome(entrega.getDestinatario().getNome());
-                        entregaDto.getDestinatario().setLougradouro(entrega.getDestinatario().getLogradouro());
-                        entregaDto.getDestinatario().setNumero(entrega.getDestinatario().getNumero());
-                        entregaDto.getDestinatario().setComplemento(entrega.getDestinatario().getComplemento());
-                        entregaDto.getDestinatario().setBairro(entrega.getDestinatario().getBairro());
-                        entregaDto.setTaxa(entrega.getTaxa());
-                        entregaDto.setStatusEntrega(entrega.getStatus());
-                        entregaDto.setDataPedido(entrega.getDataPedido());
-                        entregaDto.setDataFinalizacao(entrega.getDataFinalizacao());
-
-                        return ResponseEntity.ok(entregaDto);
+                    EntregaDto entregaDto = modelMapper.map(entrega, EntregaDto.class);
+                    return ResponseEntity.ok(entregaDto);
                     }
                 )
                 .orElse(ResponseEntity.notFound().build());

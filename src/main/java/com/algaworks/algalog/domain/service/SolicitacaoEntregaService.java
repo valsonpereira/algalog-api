@@ -27,7 +27,7 @@ public class SolicitacaoEntregaService {
 
         entrega.setCliente(cliente);
         entrega.setStatus(StatusEntrega.PENDENTE);
-        entrega.setDataPedido(OffsetDateTime    .now());
+        entrega.setDataPedido(OffsetDateTime.now());
 
         return entregaRepository.save(entrega);
     }

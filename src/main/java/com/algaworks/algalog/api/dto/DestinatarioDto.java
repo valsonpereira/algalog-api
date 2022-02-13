@@ -8,7 +8,7 @@ import lombok.Setter;
 public class DestinatarioDto {
 
     private String nome;
-    private String lougradouro;
+    private String logradouro;
     private String numero;
     private String complemento;
     private String bairro;
