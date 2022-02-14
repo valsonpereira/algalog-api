@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Component
 public class OcorrenciaMapper {
@@ -16,6 +19,12 @@ public class OcorrenciaMapper {
 
     public OcorrenciaDto toDto(Ocorrencia ocorrencia){
         return modelMapper.map(ocorrencia, OcorrenciaDto.class);
+    }
+
+    public List<OcorrenciaDto> toArrayAsAList(List<Ocorrencia> ocorrencias ){
+        return ocorrencias.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
 }
