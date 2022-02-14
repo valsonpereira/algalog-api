@@ -34,7 +34,7 @@ public class Entrega {
     @ManyToOne
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "entrega")
+    @OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL)
     private List<Ocorrencia> ocorrencias = new ArrayList<>();
 
     @Embedded
