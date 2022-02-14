@@ -14,6 +14,8 @@ import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +34,9 @@ public class Entrega {
     @ManyToOne
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "entrega")
+    private List<Ocorrencia> ocorrencias = new ArrayList<>();
+
     @Embedded
     private Destinatario destinatario;
 
@@ -47,4 +52,15 @@ public class Entrega {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime dataFinalizacao;
+
+    public Ocorrencia adicionarOcorrencia(String descricao) {
+        Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setDescricao(descricao);
+        ocorrencia.setDataRegistro(OffsetDateTime.now());
+        ocorrencia.setEntrega(this);
+
+        ocorrencias.add(ocorrencia);
+
+        return ocorrencia;
+    }
 }
