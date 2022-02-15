@@ -7,6 +7,8 @@ import com.algaworks.algalog.domain.repository.EntregaRepository;
 import com.algaworks.algalog.domain.service.FinalizacaoEntregaService;
 import com.algaworks.algalog.domain.service.SolicitacaoEntregaService;
 import com.algaworks.algalog.mapper.EntregaMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-
+@Api(value = "Entrega")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/entregas")
@@ -25,7 +27,7 @@ public class EntregaController {
     private FinalizacaoEntregaService finalizacaoEntregaService;
     private EntregaMapper entregaMapper;
 
-
+    @ApiOperation(value = "Solicitar uma entrega")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EntregaDto solicitar(@Valid @RequestBody EntregaRequest entregaRequest){
@@ -36,12 +38,13 @@ public class EntregaController {
                         .solicitar(entregaSolicitada)
                 );
     }
-
+    @ApiOperation(value = "Consultar todas as entregas")
     @GetMapping
     public List<EntregaDto> listar(){
         return entregaMapper.toArrayAsAList(entregaRepository.findAll());
     }
 
+    @ApiOperation(value = "Consultar uma entrega especifica")
     @GetMapping("/{entregaId}")
     public ResponseEntity<EntregaDto> buscar(@PathVariable Long entregaId){
         return entregaRepository.findById(entregaId)
@@ -53,6 +56,7 @@ public class EntregaController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @ApiOperation(value = "Finalizar uma entrega")
     @PutMapping("/{entregaId}/finalizacao")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void finalizar(@PathVariable Long entregaId){

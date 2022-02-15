@@ -7,6 +7,8 @@ import com.algaworks.algalog.domain.model.Ocorrencia;
 import com.algaworks.algalog.domain.service.BuscaEntregaService;
 import com.algaworks.algalog.domain.service.RegistroOcorrenciaService;
 import com.algaworks.algalog.mapper.OcorrenciaMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Api(value = "Ocorrencia")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/entregas/{entregaId}/ocorrencias")
@@ -23,6 +26,7 @@ public class OcorrenciaController {
     private OcorrenciaMapper ocorrenciaMapper;
     private BuscaEntregaService buscaEntregaService;
 
+    @ApiOperation(value = "Resgistrar uma ocorrencia em uma entrega")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OcorrenciaDto registrar(@PathVariable Long entregaId,
@@ -32,7 +36,7 @@ public class OcorrenciaController {
 
         return ocorrenciaMapper.toDto(ocorrenciaRegistrada);
     }
-
+    @ApiOperation(value = "Consultar todas ocorrencias de uma determinada entrega")
     @GetMapping
     public List<OcorrenciaDto> listar(@PathVariable Long entregaId){
 
