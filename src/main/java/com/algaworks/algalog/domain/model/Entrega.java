@@ -1,6 +1,7 @@
 package com.algaworks.algalog.domain.model;
 
 import com.algaworks.algalog.domain.ValidationGroups;
+import com.algaworks.algalog.domain.exception.NegocioException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -62,5 +63,21 @@ public class Entrega {
         ocorrencias.add(ocorrencia);
 
         return ocorrencia;
+    }
+
+    public void finalizar() {
+        if(naoPodeSerFinalizada())
+            throw new NegocioException("A entrega nao pode ser finalizada");
+
+        this.status = StatusEntrega.FINALIZADA;
+        this.dataFinalizacao = OffsetDateTime.now();
+    }
+
+    public boolean podeSerFinalizada(){
+        return this.status.equals(StatusEntrega.PENDENTE);
+    }
+
+    public boolean naoPodeSerFinalizada(){
+        return !podeSerFinalizada();
     }
 }

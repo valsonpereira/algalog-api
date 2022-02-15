@@ -19,6 +19,6 @@ public class EntregaDto {
     private List<OcorrenciaDto> ocorrencias;
     private DestinatarioDto destinatario;
     private BigDecimal taxa;
-    private StatusEntrega statusEntrega;
+    private StatusEntrega status;
     private OffsetDateTime dataPedido;
 }

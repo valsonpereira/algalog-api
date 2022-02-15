@@ -4,6 +4,7 @@ import com.algaworks.algalog.api.dto.EntregaDto;
 import com.algaworks.algalog.api.dto.request.EntregaRequest;
 import com.algaworks.algalog.domain.model.Entrega;
 import com.algaworks.algalog.domain.repository.EntregaRepository;
+import com.algaworks.algalog.domain.service.FinalizacaoEntregaService;
 import com.algaworks.algalog.domain.service.SolicitacaoEntregaService;
 import com.algaworks.algalog.mapper.EntregaMapper;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class EntregaController {
 
     private SolicitacaoEntregaService solicitacaoEntregaService;
     private EntregaRepository entregaRepository;
+    private FinalizacaoEntregaService finalizacaoEntregaService;
     private EntregaMapper entregaMapper;
 
 
@@ -49,6 +51,12 @@ public class EntregaController {
                     }
                 )
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{entregaId}/finalizacao")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finalizar(@PathVariable Long entregaId){
+        finalizacaoEntregaService.finalizar(entregaId);
     }
 
 }
