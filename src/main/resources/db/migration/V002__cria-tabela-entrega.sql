@@ -1,11 +1,11 @@
 create table entrega(
 
-	id bigint not null auto_increment,
+	id serial not null,
 	cliente_id bigint not null,
 	taxa decimal(10,2) not null,
 	status varchar(20) not null,
-	data_pedido datetime not null,
-	data_finalizacao datetime,
+	data_pedido timestamp not null,
+	data_finalizacao timestamp,
 
 	destinatario_nome varchar(60) not null,
 	destinatario_logradouro varchar(255) not null,

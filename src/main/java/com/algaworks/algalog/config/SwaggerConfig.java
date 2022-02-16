@@ -17,10 +17,10 @@ import static springfox.documentation.builders.RequestHandlerSelectors.*;
 public class SwaggerConfig {
 
     private static final String BASE_PACKAGE = "com.algaworks.algalog.api.controller";
-    private static final String API_TITLE = "API de Gerenciamento de Servico de Entrega";
+    private static final String API_TITLE = "ALGALOG - API de Gerenciamento de Servico de Entrega";
     private static final String API_DESCRIPTION = "Servico de Entrega";
     private static final String CONTACT_NAME = "Valson Pereira";
-    private static final String CONTACT_GITHUB = "https://github.com/valsonpereira";
+    private static final String CONTACT_GITHUB = "https://github.com/valsonpereira/algalog-api";
     private static final String CONTACT_EMAIL = "valson.pereira@gmail.com";
 
     @Bean

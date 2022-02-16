@@ -1,9 +1,9 @@
 create table ocorrencia(
 
-	id bigint not null auto_increment,
+	id serial not null,
 	entrega_id bigint not null,
 	descricao text not null,
-	data_registro datetime not null,
+	data_registro timestamp not null,
 
 	primary key (id)
 );
