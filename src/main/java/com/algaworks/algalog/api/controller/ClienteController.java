@@ -52,10 +52,11 @@ public class ClienteController {
     @ApiOperation(value = "atualizar um cliente")
     @PutMapping("/{clienteId}")
     public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId,
-                                             @RequestBody Cliente cliente){
+                                             @RequestBody ClienteRequest clienteRequest){
         if(!clienteRepository.existsById(clienteId))
             return ResponseEntity.notFound().build();
 
+        Cliente cliente = clienteMapper.toEntity(clienteRequest);
         cliente.setId(clienteId);
         return ResponseEntity.ok(catalogoClienteService.salvar(cliente));
     }
