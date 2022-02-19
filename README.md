@@ -18,6 +18,9 @@ Obs.: Em razão do deploy do back-end ser realizado utilizando o plano gratuito 
 - Java 17
 - Spring Boot
 - Spring Data JPA 
+- Spring Validation
+- Flyway
+- Lombok
 - Swagger
 - ModelMapper
 - Maven
